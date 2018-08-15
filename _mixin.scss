@@ -1,0 +1,27 @@
+@mixin border_rad($rad) {
+    -webkit-border-radius: $rad;
+    -ms-border-radius: $rad;
+    border-radius: $rad;
+    background-color: #AF601A;
+}
+
+@mixin btn_app {
+    width: 70%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    margin: 10% 15%;
+    transition-property: background-color, transform;
+    transition-duration: 1s;
+    &:hover {
+        background-color: darken(hsl(24, 100%, 31%), 1%);
+        @include rotate(0);
+        cursor: grab;
+    }
+}
+
+$deg:"deg";
+@mixin rotate($degree) {
+    -ms-transform: rotate($degree#{$deg});
+    -webkit-transform: rotate($degree#{$deg});
+    transform: rotate($degree#{$deg});
+}

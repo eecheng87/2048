@@ -1,0 +1,101 @@
+.main {
+  text-align: center;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  background-image: url("./source/wood1.jpg");
+  background-size: cover;
+  font-family: Consolas, monaco, monospace;
+}
+
+.main .menu {
+  border: 3px solid #993d00;
+  color: white;
+  font-weight: 300;
+  background-color: #F7DC6F;
+  position: absolute;
+  top: 10%;
+  left: 35%;
+  width: 30%;
+  height: 60%;
+  font-size: 40px;
+  list-style-type: none;
+  border-radius: 15px;
+  -webkit-transform: rotate(6deg);
+  transform: rotate(6deg);
+}
+
+.main .menu .rules {
+  border-radius: 10px;
+  background-color: #AF601A;
+  width: 70%;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  margin: 10% 15%;
+  -webkit-transition-property: background-color, -webkit-transform;
+  transition-property: background-color, -webkit-transform;
+  transition-property: background-color, transform;
+  transition-property: background-color, transform, -webkit-transform;
+  -webkit-transition-duration: 1s;
+          transition-duration: 1s;
+  -webkit-transform: rotate(10deg);
+  transform: rotate(10deg);
+}
+
+.main .menu .rules:hover {
+  background-color: #993d00;
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
+  cursor: -webkit-grab;
+  cursor: grab;
+}
+
+.main .menu .start_btn {
+  border-radius: 10px;
+  background-color: #AF601A;
+  width: 70%;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  margin: 10% 15%;
+  -webkit-transition-property: background-color, -webkit-transform;
+  transition-property: background-color, -webkit-transform;
+  transition-property: background-color, transform;
+  transition-property: background-color, transform, -webkit-transform;
+  -webkit-transition-duration: 1s;
+          transition-duration: 1s;
+  -webkit-transform: rotate(-3deg);
+  transform: rotate(-3deg);
+}
+
+.main .menu .start_btn:hover {
+  background-color: #993d00;
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
+  cursor: -webkit-grab;
+  cursor: grab;
+}
+
+.main .menu .topic_btn {
+  border-radius: 10px;
+  background-color: #AF601A;
+  width: 70%;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  margin: 10% 15%;
+  -webkit-transition-property: background-color, -webkit-transform;
+  transition-property: background-color, -webkit-transform;
+  transition-property: background-color, transform;
+  transition-property: background-color, transform, -webkit-transform;
+  -webkit-transition-duration: 1s;
+          transition-duration: 1s;
+  -webkit-transform: rotate(1deg);
+  transform: rotate(1deg);
+}
+
+.main .menu .topic_btn:hover {
+  background-color: #993d00;
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
+  cursor: -webkit-grab;
+  cursor: grab;
+}
+/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,41 @@
+@import 'mixin';
+.main {
+    text-align: center;
+    box-sizing: border-box;
+    background-image: url('./source/wood1.jpg');
+    background-size: cover;
+    font-family: Consolas, monaco, monospace;
+    .gameBlock {
+        display: none;
+    }
+    .menu {
+        border: 3px solid darken(hsl(24, 100%, 31%), 1%);
+        color: white;
+        font-weight: 300;
+        background-color: #F7DC6F;
+        position: absolute;
+        top: 10%;
+        left: 35%;
+        width: 30%;
+        height: 60%;
+        font-size: 40px;
+        list-style-type: none;
+        border-radius: 15px;
+        @include rotate(6);
+        .rules {
+            @include border_rad(10px);
+            @include btn_app;
+            @include rotate(10);
+        }
+        .start_btn {
+            @include border_rad(10px);
+            @include btn_app;
+            @include rotate(-3);
+        }
+        .topic_btn {
+            @include border_rad(10px);
+            @include btn_app;
+            @include rotate(1);
+        }
+    }
+}
