@@ -5,8 +5,17 @@
     background-image: url('./source/wood1.jpg');
     background-size: cover;
     font-family: Consolas, monaco, monospace;
-    .gameBlock {
-        text-align: center;
+    #boxBlock {
+        display: none;
+        position: absolute;
+        top: 15%;
+        left: 38%;
+    }
+    #gameBlock {
+        display: none;
+        position: absolute;
+        top: 15%;
+        left: 38%;
     }
     .menu {
         border: 3px solid darken(hsl(24, 100%, 31%), 1%);

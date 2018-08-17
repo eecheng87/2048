@@ -1,13 +1,33 @@
 let gap_width = 8;
 let box_width = 90;
-
+let box_value = [
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0]
+];
 document.getElementById('play_btn').addEventListener('click', function() {
     document.getElementsByClassName('menu')[0].style.display = "none";
+    document.getElementById('boxBlock').style.display = "block";
+    document.getElementById('gameBlock').style.display = "block";
     startGame();
 });
+//get boxBlock context
+b = document.getElementById('boxBlock');
+box_context = b.getContext('2d');
 
 function startGame() {
     paintGameArea();
+    geneBox();
+}
+
+function geneBox() {
+    let pos = Math.floor(Math.random() * 16) + 1; // pos store index 1~16
+    let row = Math.ceil(pos / 4);
+    let col = ((pos) % 4 == 0) ? 4 : (pos) % 4;
+    box_context.fillStyle = "rgba(171, 178, 185, 1)";
+    roundRect(box_context, gap_width * col + box_width * (col - 1), gap_width * row + box_width * (row - 1), box_width, box_width, 10, false);
+    // filltext, update box value array
 }
 
 function paintGameArea() {
@@ -16,23 +36,10 @@ function paintGameArea() {
     context.fillStyle = "rgba(86, 101, 115, 1)";
     roundRect(context, 0, 0, 400, 400, 10, true, "rgba(46, 64, 83, 1)");
     context.fillStyle = "rgba(123, 125, 125, 1)";
-    roundRect(context, gap_width, gap_width, box_width, box_width, 10, false);
-    roundRect(context, 2 * gap_width + box_width, gap_width, box_width, box_width, 10, false);
-    roundRect(context, 3 * gap_width + 2 * box_width, gap_width, box_width, box_width, 10, false);
-    roundRect(context, 4 * gap_width + 3 * box_width, gap_width, box_width, box_width, 10, false);
-    roundRect(context, gap_width, 2 * gap_width + box_width, box_width, box_width, 10, false);
-    roundRect(context, 2 * gap_width + box_width, 2 * gap_width + box_width, box_width, box_width, 10, false);
-    roundRect(context, 3 * gap_width + 2 * box_width, 2 * gap_width + box_width, box_width, box_width, 10, false);
-    roundRect(context, 4 * gap_width + 3 * box_width, 2 * gap_width + box_width, box_width, box_width, 10, false);
-    roundRect(context, gap_width, 3 * gap_width + 2 * box_width, box_width, box_width, 10, false);
-    roundRect(context, 2 * gap_width + box_width, 3 * gap_width + 2 * box_width, box_width, box_width, 10, false);
-    roundRect(context, 3 * gap_width + 2 * box_width, 3 * gap_width + 2 * box_width, box_width, box_width, 10, false);
-    roundRect(context, 4 * gap_width + 3 * box_width, 3 * gap_width + 2 * box_width, box_width, box_width, 10, false);
-    roundRect(context, gap_width, 4 * gap_width + 3 * box_width, box_width, box_width, 10, false);
-    roundRect(context, 2 * gap_width + box_width, 4 * gap_width + 3 * box_width, box_width, box_width, 10, false);
-    roundRect(context, 3 * gap_width + 2 * box_width, 4 * gap_width + 3 * box_width, box_width, box_width, 10, false);
-    roundRect(context, 4 * gap_width + 3 * box_width, 4 * gap_width + 3 * box_width, box_width, box_width, 10, false);
-
+    for (let i = 1, k = 0; i < 5, k < 4; ++i, ++k)
+        for (let j = 1, m = 0; j < 5, m < 4; ++j, ++m) {
+            roundRect(context, gap_width * j + box_width * m, gap_width * i + box_width * k, box_width, box_width, 10, false);
+        }
 }
 
 function roundRect(ctx, x, y, width, height, radius, stroke, strokeColor) {
