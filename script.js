@@ -6,6 +6,12 @@ var box_value = [
     [0, 0, 0, 0],
     [0, 0, 0, 0]
 ];
+var cmp_value = [
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0]
+];
 var currentMove = "none";
 document.getElementById('play_btn').addEventListener('click', function() {
     document.getElementsByClassName('menu')[0].style.display = "none";
@@ -16,6 +22,9 @@ document.getElementById('play_btn').addEventListener('click', function() {
 //get boxBlock context
 b = document.getElementById('boxBlock');
 box_context = b.getContext('2d');
+//get background context
+c = document.getElementById('gameBlock');
+context = c.getContext('2d');
 
 function startGame() {
     paintGameArea();
@@ -132,13 +141,94 @@ function move(dir) {
             }
             break;
     }
-
-    update();
+    merge(dir);
 }
 
+function merge(dir) { //after move function
+
+    switch (dir) {
+        case "right":
+            for (let i = 0; i < 4; i++) //row
+                for (let j = 3; j >= 1; j--) { //col
+                if (box_value[i][j] != 0) {
+                    if (box_value[i][j] == box_value[i][j - 1]) { //merge
+                        box_value[i][j] *= 2;
+                        //condense
+                        let k;
+                        for (k = j - 1; k > 0; k--) {
+                            box_value[i][k] = box_value[i][k - 1];
+                        }
+                        box_value[i][k] = 0;
+                    }
+                }
+
+            }
+            break;
+        case "left":
+            for (let i = 0; i < 4; i++) //row
+                for (let j = 0; j < 3; j++) { //col
+                if (box_value[i][j] != 0) {
+                    if (box_value[i][j] == box_value[i][j + 1]) { //merge
+                        box_value[i][j] *= 2;
+                        //condense
+                        let k;
+                        for (k = j + 1; k < 3; k++) {
+                            box_value[i][k] = box_value[i][k + 1];
+                        }
+                        box_value[i][k] = 0;
+                    }
+                }
+
+            }
+            break;
+        case "up":
+            for (let j = 0; j < 4; j++)
+                for (let i = 0; i < 3; i++) {
+                    if (box_value[i][j] != 0) {
+                        if (box_value[i][j] == box_value[i + 1][j]) { //merge
+                            box_value[i][j] *= 2;
+                            //condense
+                            let k;
+                            for (k = i + 1; k < 3; k++) {
+                                box_value[k][j] = box_value[k + 1][j];
+                            }
+                            box_value[k][j] = 0;
+                        }
+                    }
+
+                }
+            break;
+        case "down":
+            for (let j = 0; j < 4; j++)
+                for (let i = 3; i > 0; i--) {
+                    if (box_value[i][j] != 0) {
+                        if (box_value[i][j] == box_value[i - 1][j]) { //merge
+                            box_value[i][j] *= 2;
+                            //condense
+                            let k;
+                            for (k = i - 1; k > 0; k--) {
+                                box_value[k][j] = box_value[k - 1][j];
+                            }
+                            box_value[k][j] = 0;
+                        }
+                    }
+
+                }
+            break;
+    }
+    if (!isSame()) {
+        box_value.forEach((row, index_row) => { //copy box_value's each value to cmp_value
+            row.forEach((value, index_col) => {
+                cmp_value[index_row][index_col] = value;
+            });
+        });
+        update();
+    }
+}
 
 function update() {
     let x, y;
+    box_context.clearRect(0, 0, 400, 400);
 
     for (let i = 0; i < 4; ++i) //row
         for (let j = 0; j < 4; ++j) { //column
@@ -148,7 +238,13 @@ function update() {
             box_context.fillStyle = "rgba(171, 178, 185, 1)";
             roundRect(box_context, x, y, box_width, box_width, 10, false);
             box_context.fillStyle = "white";
-            box_context.font = "60px Verdana";
+            if (box_value[i][j] > 1000) {
+                box_context.font = "35px Verdana";
+            } else if (box_value[i][j] > 100) {
+                box_context.font = "45px Verdana";
+            } else {
+                box_context.font = "55px Verdana";
+            }
             box_context.textAlign = "center";
             box_context.fillText(box_value[i][j].toString(), x + box_width / 2, y + 70);
         } else {
@@ -156,8 +252,9 @@ function update() {
             roundRect(box_context, x, y, box_width, box_width, 10, false);
         }
     }
-
-    geneBox();
+    if (isEmpty()) {
+        setTimeout(geneBox, 200);
+    }
 }
 
 function geneBox() {
@@ -173,23 +270,25 @@ function geneBox() {
             existFlag = true;
         }
     } while (!existFlag);
-    //let row = Math.ceil(pos / 4);
-    //let col = ((pos) % 4 == 0) ? 4 : (pos) % 4;
     let x = gap_width * col + box_width * (col - 1);
     let y = gap_width * row + box_width * (row - 1);
     box_context.fillStyle = "rgba(171, 178, 185, 1)";
     roundRect(box_context, x, y, box_width, box_width, 10, false);
     // filltext, update box value array
     box_value[row - 1][col - 1] = 2;
+    cmp_value[row - 1][col - 1] = 2; //renew cmp_value matrix
+
     box_context.fillStyle = "white";
     box_context.font = "60px Verdana";
     box_context.textAlign = "center";
     box_context.fillText("2", x + box_width / 2, y + 70);
+
+    if (!canMove()) { //can't move
+        gameOver();
+    }
 }
 
 function paintGameArea() {
-    c = document.getElementById('gameBlock');
-    context = c.getContext('2d');
     context.fillStyle = "rgba(86, 101, 115, 1)";
     roundRect(context, 0, 0, 400, 400, 10, true, "rgba(46, 64, 83, 1)");
     context.fillStyle = "rgba(123, 125, 125, 1)";
@@ -220,4 +319,40 @@ function roundRect(ctx, x, y, width, height, radius, stroke, strokeColor) {
         ctx.strokeStyle = strokeColor;
         ctx.stroke();
     }
+}
+
+function isEmpty() {
+    for (let i = 0; i < 4; i++)
+        for (let j = 0; j < 4; j++)
+            if (box_value[i][j] == 0)
+                return true;
+}
+
+function canMove() {
+    for (let i = 0; i < 3; i++)
+        for (let j = 0; j < 3; j++) {
+            if (box_value[i][j] == box_value[i + 1][j] || box_value[i][j] == box_value[i][j + 1])
+                return true;
+            if (box_value[3][2] == box_value[3][3] || box_value[2][3] == box_value[3][3])
+                return true;
+        }
+}
+
+function isSame() {
+    let flag = true;
+    cmp_value.forEach((row, index_row) => {
+        row.forEach((value, index_col) => {
+            if (cmp_value[index_row][index_col] != box_value[index_row][index_col])
+                flag = false;
+        });
+    });
+    if (flag) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function gameOver() {
+    console.log("GG");
 }
