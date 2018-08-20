@@ -19,6 +19,47 @@ document.getElementById('play_btn').addEventListener('click', function() {
     document.getElementById('gameBlock').style.display = "block";
     startGame();
 });
+
+document.getElementsByClassName('rules')[0].addEventListener('click', () => {
+    document.getElementsByClassName('instruction')[0].style.display = "block";
+});
+$(document).ready(function() {
+    $(".topic_btn").click(function() {
+        $(".theme").fadeIn()
+    });
+    $("#rule_close_btn").click(function() {
+        $(".instruction").fadeOut()
+    });
+    $("#theme_close_btn").click(function() {
+        $(".theme").fadeOut();
+        changeBack();
+    });
+});
+
+function changeBack() {
+    if (document.getElementById('box1').checked == true) {
+        document.getElementsByClassName('main')[0].style.backgroundImage = "url('../source/cave.jpg')";
+        document.getElementsByClassName('menu')[0].style.backgroundColor = "#F7DC6F";
+        document.getElementsByClassName('menu')[0].style.border = "3px solid #993d00";
+        document.getElementsByClassName('rules')[0].style.backgroundColor = "hsl(24, 100%, 31%)";
+        document.getElementsByClassName('start_btn')[0].style.backgroundColor = "hsl(24, 100%, 31%)";
+        document.getElementsByClassName('topic_btn')[0].style.backgroundColor = "hsl(24, 100%, 31%)";
+    } else if (document.getElementById('box2').checked == true) {
+        document.getElementsByClassName('main')[0].style.backgroundImage = "url('../source/iceland.jpg')";
+        document.getElementsByClassName('menu')[0].style.backgroundColor = "rgb(214, 234, 248)";
+        document.getElementsByClassName('menu')[0].style.border = "3px solid rgb(93, 173, 226  )";
+        document.getElementsByClassName('rules')[0].style.backgroundColor = "rgb(93, 173, 226)";
+        document.getElementsByClassName('start_btn')[0].style.backgroundColor = "rgb(93, 173, 226)";
+        document.getElementsByClassName('topic_btn')[0].style.backgroundColor = "rgb(93, 173, 226)";
+    } else if (document.getElementById('box3').checked == true) {
+        document.getElementsByClassName('main')[0].style.backgroundImage = "url('../source/grassland.jpg')";
+        document.getElementsByClassName('menu')[0].style.backgroundColor = "#F7DC6F";
+        document.getElementsByClassName('menu')[0].style.border = "3px solid #993d00";
+        document.getElementsByClassName('rules')[0].style.backgroundColor = "hsl(24, 100%, 31%)";
+        document.getElementsByClassName('start_btn')[0].style.backgroundColor = "hsl(24, 100%, 31%)";
+        document.getElementsByClassName('topic_btn')[0].style.backgroundColor = "hsl(24, 100%, 31%)";
+    }
+}
 //get boxBlock context
 b = document.getElementById('boxBlock');
 box_context = b.getContext('2d');

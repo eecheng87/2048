@@ -1,10 +1,29 @@
+.main .instruction .material-icons {
+  font-size: 48px;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+
+.main .instruction .material-icons:hover {
+  font-size: 55px;
+  cursor: pointer;
+  z-index: 2;
+}
+
+body {
+  background-image: url("./source/cave.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  overflow-y: hidden;
+  height: 800px;
+}
+
 .main {
   text-align: center;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  background-image: url("./source/cave.JPG");
-  background-size: cover;
-  font-family: Consolas, monaco, monospace;
 }
 
 .main #boxBlock {
@@ -21,7 +40,110 @@
   left: 38%;
 }
 
+.main .instruction {
+  display: none;
+  position: absolute;
+  width: 60%;
+  height: 60%;
+  margin-left: 20%;
+  margin-right: 20%;
+  background-color: #EAECEE;
+  border-radius: 20px;
+  border: 2px solid #ABB2B9;
+  z-index: 1;
+  -webkit-box-shadow: 0px 0px 50px 10px black;
+          box-shadow: 0px 0px 50px 10px black;
+  -webkit-animation-name: rules_animation;
+          animation-name: rules_animation;
+  -webkit-animation-duration: 0.5s;
+          animation-duration: 0.5s;
+  -webkit-animation-timing-function: ease-in-out;
+          animation-timing-function: ease-in-out;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+.main .instruction header {
+  margin-top: 4%;
+  text-align: center;
+  font-family: Courier New;
+  font-size: 60px;
+  font-weight: 600;
+}
+
+.main .instruction p {
+  text-align: left;
+  text-indent: 20px;
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+  font-family: Courier New;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.main .instruction p:nth-child(2) {
+  margin-top: 5%;
+}
+
+.main .theme {
+  display: none;
+  position: absolute;
+  border-radius: 20px;
+  border: 2px solid #ABB2B9;
+  z-index: 1;
+  -webkit-box-shadow: 0px 0px 50px 10px black;
+          box-shadow: 0px 0px 50px 10px black;
+  margin-left: 32%;
+  margin-right: 32%;
+  margin-top: 15%;
+  width: 36%;
+  height: 30%;
+  background-color: #D5D8DC;
+}
+
+.main .theme i#theme_close_btn {
+  font-size: 40px;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+
+.main .theme i#theme_close_btn:hover {
+  cursor: pointer;
+  font-size: 45px;
+}
+
+.main .theme input {
+  display: block;
+}
+
+.main .theme input[type=checkbox] {
+  display: none;
+}
+
+.main .theme input[type=checkbox] + label:before {
+  letter-spacing: 10px;
+  font-family: 'Material Icons';
+  content: "check_box_outline_blank";
+}
+
+.main .theme input[type=checkbox]:checked + label:before {
+  letter-spacing: 10px;
+  font-family: 'Material Icons';
+  content: "check_box";
+}
+
+.main .theme label {
+  font-weight: 700;
+  font-family: monospace;
+  margin-top: 20px;
+  font-size: 30px;
+  display: block;
+}
+
 .main .menu {
+  font-family: Consolas, monaco, monospace;
   border: 3px solid #993d00;
   color: white;
   font-weight: 300;
@@ -111,5 +233,27 @@
   transform: rotate(0deg);
   cursor: -webkit-grab;
   cursor: grab;
+}
+
+@-webkit-keyframes rules_animation {
+  0% {
+    -webkit-transform: translate(0, -100px);
+            transform: translate(0, -100px);
+  }
+  100% {
+    -webkit-transform: translate(0, 100px);
+            transform: translate(0, 100px);
+  }
+}
+
+@keyframes rules_animation {
+  0% {
+    -webkit-transform: translate(0, -100px);
+            transform: translate(0, -100px);
+  }
+  100% {
+    -webkit-transform: translate(0, 100px);
+            transform: translate(0, 100px);
+  }
 }
 /*# sourceMappingURL=style.css.map */

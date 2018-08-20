@@ -2,7 +2,36 @@ doctype html
 html 
     head
         link(rel="stylesheet" type="text/css" href="../style.css")
+        link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css")
+        link(rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons")
+        script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js")
     body.main
+        div.theme
+            i.material-icons#theme_close_btn
+                |close
+            input(id="box1" type="checkbox")
+            label(for="box1")
+                |Cave
+            input(id="box2" type="checkbox")
+            label(for="box2")
+                |Polar-Land
+            input(id="box3" type="checkbox")
+            label(for="box3")
+                |Grass-Land    
+        div.instruction 
+            header
+                |How to 2048
+            p
+                |2048 is played on a gray 4×4 grid, with numbered tiles that slide 
+                |smoothly when a player moves them using the four arrow keys.
+                |Every turn, a new tile will randomly appear in an empty spot on the board with a value of either 2 or 4.
+            p
+                |Tiles slide as far as possible in the chosen direction until 
+                |they are stopped by either another tile or the edge of the grid.
+                | If two tiles of the same number collide while moving, they will 
+                |merge into a tile with the total value of the two tiles that collided
+            i.material-icons#rule_close_btn
+                |close
         div.menu
             div.rules
                 |RULES

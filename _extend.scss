@@ -1,0 +1,11 @@
+%close_model {
+    &:hover {
+        font-size: 55px;
+        cursor: pointer;
+        z-index: 2;
+    }
+    font-size: 48px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}

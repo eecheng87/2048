@@ -1,10 +1,17 @@
 @import 'mixin';
+@import 'extend';
+body {
+    background-image: url('./source/cave.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    overflow-y: hidden;
+    height: 800px;
+}
+
 .main {
     text-align: center;
     box-sizing: border-box;
-    background-image: url('./source/cave.JPG');
-    background-size: cover;
-    font-family: Consolas, monaco, monospace;
     #boxBlock {
         display: none;
         position: absolute;
@@ -17,7 +24,98 @@
         top: 15%;
         left: 38%;
     }
+    .instruction {
+        display: none;
+        header {
+            margin-top: 4%;
+            text-align: center;
+            font-family: Courier New;
+            font-size: 60px;
+            font-weight: 600;
+        }
+        p {
+            &:nth-child(2) {
+                margin-top: 5%;
+            }
+            text-align: left;
+            text-indent: 20px;
+            width: 80%;
+            margin-left: 10%;
+            margin-right: 10%;
+            font-family: Courier New;
+            font-size: 20px;
+            font-weight: 600;
+        }
+        .material-icons {
+            @extend %close_model;
+        }
+        position: absolute;
+        width: 60%;
+        height: 60%;
+        margin-left: 20%;
+        margin-right: 20%;
+        background-color: #EAECEE;
+        border-radius: 20px;
+        border: 2px solid #ABB2B9;
+        z-index: 1;
+        box-shadow: 0px 0px 50px 10px black;
+        animation-name: rules_animation;
+        animation-duration: 0.5s;
+        animation-timing-function: ease-in-out;
+        animation-fill-mode: forwards;
+    }
+    .theme {
+        i#theme_close_btn {
+            &:hover {
+                cursor: pointer;
+                font-size: 45px;
+            }
+            font-size: 40px;
+            position: absolute;
+            top: 0px;
+            right: 0px;
+        }
+        input {
+            &[type=checkbox] {
+                //let original check box disappear
+                display: none;
+            }
+            &[type=checkbox]+label:before {
+                //add new check box icon
+                letter-spacing: 10px;
+                font-family: 'Material Icons';
+                content: "check_box_outline_blank";
+            }
+            &[type=checkbox]:checked+label:before {
+                //add new check box icon
+                letter-spacing: 10px;
+                font-family: 'Material Icons';
+                content: "check_box";
+            }
+            display: block;
+        }
+        label {
+            font-weight: 700;
+            font-family: monospace;
+            margin-top: 20px;
+            font-size: 30px;
+            display: block;
+        }
+        display: none;
+        position: absolute;
+        border-radius: 20px;
+        border: 2px solid #ABB2B9;
+        z-index: 1;
+        box-shadow: 0px 0px 50px 10px black;
+        margin-left: 32%;
+        margin-right: 32%;
+        margin-top: 15%;
+        width: 36%;
+        height: 30%;
+        background-color: #D5D8DC;
+    }
     .menu {
+        font-family: Consolas, monaco, monospace;
         border: 3px solid darken(hsl(24, 100%, 31%), 1%);
         color: white;
         font-weight: 300;
@@ -46,5 +144,14 @@
             @include btn_app;
             @include rotate(1);
         }
+    }
+}
+
+@keyframes rules_animation {
+    0% {
+        transform: translate(0, -100px);
+    }
+    100% {
+        transform: translate(0, 100px);
     }
 }
